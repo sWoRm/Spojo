@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.sands</groupId>
+	<artifactId>spojo-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Spojo</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<description>Spojo Framework Parent</description>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy/MM/dd - HH:mm:ss</maven.build.timestamp.format>
+		<!-- compiler config -->
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.compiler.fork>true</maven.compiler.fork>
+		<maven.compiler.meminitial>256m</maven.compiler.meminitial>
+		<maven.compiler.maxmem>512m</maven.compiler.maxmem>
+		<maven.compiler.debug>false</maven.compiler.debug>
+		<maven.surefire.maxmen>-Xmx512M</maven.surefire.maxmen>
+		<encoding>${maven.compiler.encoding}</encoding>
+
+		<!-- dependency versions -->
+		<spring.version>3.0.6.RELEASE</spring.version>
+		<hibernate.version>3.5.6-Final</hibernate.version>
+
+		<!-- eclipse simulation variable -->
+		<workspaceFolder>${basedir}/..</workspaceFolder>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>The GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:sWoRm/Spojo.git</connection>
+		<developerConnection>scm:git:git@github.com:sWoRm/Spojo.git
+		</developerConnection>
+		<url>git@github.com:sWoRm/Spojo.git</url>
+	</scm>
+
+	<url>http://github.com/sWoRm/Spojo</url>
+	<developers>
+		<developer>
+			<id>vpalau</id>
+			<name>Vincent Palau</name>
+			<email>vpalau@gmail.com</email>
+			<organization>Rule</organization>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Developper</role>
+			</roles>
+		</developer>
+	</developers>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<!-- <executable>${javac.executable}</executable> -->
+					<!-- <fork>${maven.compiler.fork}</fork> -->
+					<meminitial>${maven.compiler.meminitial}</meminitial>
+					<maxmem>${maven.compiler.maxmem}</maxmem>
+					<encoding>${maven.compiler.encoding}</encoding>
+					<!-- <debug>${maven.compiler.debug}</debug> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifestEntries>
+							<mode>development</mode>
+							<message>s3cr3t</message>
+							<url>${project.url}</url>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+						</manifestEntries>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<packageName>${project.groupId}.spojo</packageName>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>sourceAndjavadoc</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-source</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<dependencies>
+		<!-- ===== TESTING DEPENDENCIES ===== -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- ===== COMPILING DEPENDENCIES ===== -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>spojo-core</module>
+		<module>spojo-hibernate</module>
+	</modules>
+</project>
