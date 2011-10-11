@@ -6,6 +6,7 @@ package org.sands.spojo;
 import org.sands.spojo.config.RuleMetadata;
 import org.sands.spojo.config.SpojoConfiguration;
 import org.sands.spojo.exceptions.RuleException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.sands.spojo.utils.SpojoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +34,9 @@ public class Spojo {
 		setConfiguration(configuration);
 	}
 
-	public void checkConfiguration() throws RuleException {
+	public void checkConfiguration() throws SpojoException {
 		if (getConfiguration() == null) {
-			throw new RuleException("Configuration not initialized yet");
+			throw new SpojoException("Configuration not initialized yet");
 		}
 	}
 
@@ -50,9 +51,12 @@ public class Spojo {
 	 *            the Rule definition to apply
 	 * 
 	 * @return a shrunken object
+	 * @throws SpojoException
+	 *             if the instantiation or the copying process failed.
 	 * @throws RuleException
+	 *             if the Rule definition is <code>DISABLED</code> or unknown
 	 */
-	public <T> T shrink(final T source, final String name) throws RuleException {
+	public <T> T shrink(final T source, final String name) throws RuleException, SpojoException {
 		T target = null;
 
 		if (source != null) {
@@ -82,9 +86,12 @@ public class Spojo {
 	 *            the Rule definition to apply
 	 * 
 	 * @return a shrunken object
+	 * @throws SpojoException
+	 *             if the instantiation or the copying process failed.
 	 * @throws RuleException
+	 *             if the Rule definition is <code>DISABLED</code> or unknown
 	 */
-	public <T, E> E shrink(final T source, final E target, final String name) throws RuleException {
+	public <T, E> E shrink(final T source, final E target, final String name) throws RuleException, SpojoException {
 
 		if (source != null && target != null) {
 			checkConfiguration();
@@ -109,19 +116,20 @@ public class Spojo {
 	 * @param ruleMetadata
 	 *            the Rule definition to apply
 	 * @return a shrunken object
+	 * @throws SpojoException
+	 *             if the instantiation or the copying process failed.
 	 * @throws RuleException
-	 *             if the instantiation or the copying process failed or if the Rule definition is <code>DISABLED</code> or
-	 *             unknown.
+	 *             if the Rule definition is <code>DISABLED</code> or unknown
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> T internalShrink(final T source, final RuleMetadata ruleMetadata) throws RuleException {
+	private <T> T internalShrink(final T source, final RuleMetadata ruleMetadata) throws RuleException, SpojoException {
 		try {
 			// create new target object
 			T target = (T) SpojoUtils.instantiateAs(source);
 			this.internalShrink(source, target, ruleMetadata);
 			return target;
 		} catch (BeanInstantiationException e) {
-			throw new RuleException("the bean couldn't be instanciated", e);
+			throw new SpojoException("the bean couldn't be instanciated", e);
 		}
 	}
 
@@ -135,11 +143,13 @@ public class Spojo {
 	 * @param ruleMetadata
 	 *            the Rule definition to apply
 	 * @return a shrunken object
+	 * @throws SpojoException
+	 *             if the instantiation or the copying process failed.
 	 * @throws RuleException
-	 *             if the instantiation or the copying process failed or if the Rule definition is <code>DISABLED</code> or
-	 *             unknown.
+	 *             if the Rule definition is <code>DISABLED</code> or unknown
 	 */
-	private <T, E> void internalShrink(final T source, final E target, final RuleMetadata ruleMetadata) throws RuleException {
+	private <T, E> void internalShrink(final T source, final E target, final RuleMetadata ruleMetadata) throws RuleException,
+			SpojoException {
 		try {
 			// copy the members
 			switch (ruleMetadata.getType()) {
@@ -161,9 +171,9 @@ public class Spojo {
 						ruleMetadata.getType()));
 			}
 		} catch (BeanInstantiationException e) {
-			throw new RuleException("the bean couldn't be instanciated", e);
+			throw new SpojoException("the bean couldn't be instanciated", e);
 		} catch (BeansException e) {
-			throw new RuleException("the copying process failed", e);
+			throw new SpojoException("the copying process failed", e);
 		}
 	}
 

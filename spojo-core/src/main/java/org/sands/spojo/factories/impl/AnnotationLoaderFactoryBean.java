@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.sands.spojo.annotations.Rule;
 import org.sands.spojo.annotations.Rules;
 import org.sands.spojo.config.SpojoConfiguration;
-import org.sands.spojo.exceptions.RuleException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.sands.spojo.factories.LoaderFactoryFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -76,9 +76,9 @@ public class AnnotationLoaderFactoryBean implements LoaderFactoryFactory {
 					}
 				}
 			} catch (IOException ex) {
-				throw new RuleException("Failed to scan classpath for unlisted classes", ex);
+				throw new SpojoException("Failed to scan classpath for unlisted classes", ex);
 			} catch (ClassNotFoundException ex) {
-				throw new RuleException("Failed to load annotated classes from classpath", ex);
+				throw new SpojoException("Failed to load annotated classes from classpath", ex);
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public class AnnotationLoaderFactoryBean implements LoaderFactoryFactory {
 	 */
 	protected SpojoConfiguration getSpojoConfiguration() {
 		if (spojoConfiguration == null) {
-			throw new RuleException("Configuration not initialized yet");
+			throw new SpojoException("Configuration not initialized yet");
 		}
 		return spojoConfiguration;
 	}

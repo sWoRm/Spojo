@@ -15,6 +15,7 @@ import org.sands.spojo.annotations.Rule;
 import org.sands.spojo.annotations.Rules;
 import org.sands.spojo.config.SpojoConfiguration;
 import org.sands.spojo.exceptions.RuleException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -144,7 +145,7 @@ public class CustomAnnotationSessionFactoryBean extends AnnotationSessionFactory
 	 */
 	protected SpojoConfiguration getLightweightConfiguration() {
 		if (spojoConfiguration == null) {
-			throw new RuleException("Configuration not initialized yet");
+			throw new SpojoException("Configuration not initialized yet");
 		}
 		return spojoConfiguration;
 	}
