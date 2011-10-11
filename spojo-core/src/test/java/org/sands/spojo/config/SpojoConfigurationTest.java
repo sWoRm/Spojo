@@ -21,6 +21,7 @@ import org.sands.spojo.data.BasicProperty;
 import org.sands.spojo.enums.RuleType;
 import org.sands.spojo.exceptions.RuleException;
 import org.sands.spojo.exceptions.RuleNotFoundException;
+import org.sands.spojo.exceptions.SpojoException;
 
 public class SpojoConfigurationTest extends BaseTestCase {
 
@@ -269,19 +270,19 @@ public class SpojoConfigurationTest extends BaseTestCase {
 		assertEquals(rule1.type(), expected.getType());
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testAddRuleNull() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.addRule(null);
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testAddRuleEmpty() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.addRule(new ArrayList<Rule>());
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testAddClassNull() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.addClass(null);
@@ -309,13 +310,13 @@ public class SpojoConfigurationTest extends BaseTestCase {
 		assertEquals(EXCLUDE, expected.getType());
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testAddRuleMetadata1() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.addRuleMetadata((RuleMetadata) null);
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testAddRuleMetadata2() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.addRuleMetadata((List<RuleMetadata>) null);
@@ -458,7 +459,7 @@ public class SpojoConfigurationTest extends BaseTestCase {
 		assertEquals(metadata9, configuration.getRuleMetadata("c9"));
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testGetRuleMetadata3() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		configuration.setRuleMapByName(null);
@@ -479,14 +480,14 @@ public class SpojoConfigurationTest extends BaseTestCase {
 		configuration.iterateExtendsFrom(metadata1, null, null);
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testIterateExtendsFrom3() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		RuleMetadata metadata1 = new RuleMetadataImpl("c1", EXCLUDE, new String[] { "c9" }, new String[] { "Z1", "B1", "C1" });
 		configuration.iterateExtendsFrom(metadata1, null, null);
 	}
 
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testIterateExtendsFrom4() {
 		SpojoConfiguration configuration = new SpojoConfiguration();
 		RuleMetadata metadata1 = new RuleMetadataImpl("c1", EXCLUDE, new String[] { "c9" }, new String[] { "Z1", "B1", "C1" });

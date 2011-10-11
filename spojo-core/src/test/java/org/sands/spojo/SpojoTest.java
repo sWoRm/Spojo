@@ -26,6 +26,7 @@ import org.sands.spojo.config.RuleMetadataImpl;
 import org.sands.spojo.config.SpojoConfiguration;
 import org.sands.spojo.exceptions.RuleException;
 import org.sands.spojo.exceptions.RuleNotFoundException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.sands.spojo.model.Chef;
 import org.sands.spojo.model.Client;
 import org.sands.spojo.model.Gender;
@@ -387,8 +388,8 @@ public class SpojoTest extends BaseTestCase {
 			clientMap.put(client.getName(), client);
 		}
 
-		List<Client> shrunkenClients = spojo.shrink(new ArrayList<Client>(clientMap.values()), CLIENT_NAMESPACE + EMPTY
-				+ EXCLUDE);
+		List<Client> shrunkenClients = spojo
+				.shrink(new ArrayList<Client>(clientMap.values()), CLIENT_NAMESPACE + EMPTY + EXCLUDE);
 
 		@SuppressWarnings("unchecked")
 		Matcher<String> anyOf = anyOf(is("1"), is("2"), is("3"), is("4"), is("5"));
@@ -763,7 +764,7 @@ public class SpojoTest extends BaseTestCase {
 	/**
 	 * Test method for {@link org.sands.spojo.Spojo#shrink(Object, Object, String)}.
 	 */
-	@Test(expected = RuleException.class)
+	@Test(expected = SpojoException.class)
 	public void testShrinkTEStringNull() {
 		Spojo spojoTmp = new Spojo(null);
 		spojoTmp.shrink(new Object(), new Object(), SHOP_NAMESPACE + NAME_GENDER + INCLUDE);

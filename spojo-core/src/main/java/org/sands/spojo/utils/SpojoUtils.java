@@ -20,7 +20,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.sands.spojo.data.Property;
-import org.sands.spojo.exceptions.RuleException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
@@ -131,12 +131,12 @@ public abstract class SpojoUtils {
 	 *             if the copying failed
 	 * @throws BeanInstantiationException
 	 *             if the bean cannot be instantiated
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if any else errors occurs
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void copyPropertiesWithExclude(final Object source, final Object target, final Property<String> property)
-			throws BeansException, BeanInstantiationException, RuleException {
+			throws BeansException, BeanInstantiationException, SpojoException {
 
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
@@ -172,7 +172,7 @@ public abstract class SpojoUtils {
 						}
 
 					} catch (Throwable ex) {
-						throw new RuleException("Could not copy properties from source to target", ex);
+						throw new SpojoException("Could not copy properties from source to target", ex);
 					}
 				}
 			}
@@ -193,12 +193,12 @@ public abstract class SpojoUtils {
 	 *            true/false to include/exclude properties
 	 * @throws BeansException
 	 * @throws BeanInstantiationException
-	 * @throws RuleException
+	 * @throws SpojoException
 	 */
 	@SuppressWarnings("unchecked")
 	protected static <T> void copyPropertiesCollection(final Collection<T> source, final Collection<T> target,
 			final Property<String> property, final boolean include) throws BeansException, BeanInstantiationException,
-			RuleException {
+			SpojoException {
 
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
@@ -222,10 +222,10 @@ public abstract class SpojoUtils {
 	 *            true/false to include/exclude properties
 	 * @throws BeansException
 	 * @throws BeanInstantiationException
-	 * @throws RuleException
+	 * @throws SpojoException
 	 */
 	protected static void copyPropertiesArray(final Object source, final Object target, final Property<String> property,
-			final boolean include) throws BeansException, BeanInstantiationException, RuleException {
+			final boolean include) throws BeansException, BeanInstantiationException, SpojoException {
 
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
@@ -255,12 +255,12 @@ public abstract class SpojoUtils {
 	 *             if the copying failed
 	 * @throws BeanInstantiationException
 	 *             if the bean cannot be instantiated
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if any else errors occurs
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void copyPropertiesWithInclude(final Object source, final Object target, final Property<String> property)
-			throws BeansException, BeanInstantiationException, RuleException {
+			throws BeansException, BeanInstantiationException, SpojoException {
 
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");
@@ -304,7 +304,7 @@ public abstract class SpojoUtils {
 							}
 							writeMethod.invoke(target, value);
 						} catch (Throwable ex) {
-							throw new RuleException("Could not copy properties from source to target", ex);
+							throw new SpojoException("Could not copy properties from source to target", ex);
 						}
 					}
 				}
@@ -332,11 +332,11 @@ public abstract class SpojoUtils {
 	 *             if the copying failed
 	 * @throws BeanInstantiationException
 	 *             if the bean cannot be instantiated
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if any else errors occurs
 	 */
 	public static void copyProperties(final Object source, final Object target, final Property<String> property,
-			final boolean include) throws BeansException, BeanInstantiationException, RuleException {
+			final boolean include) throws BeansException, BeanInstantiationException, SpojoException {
 		if (include) {
 			copyPropertiesWithInclude(source, target, property);
 		} else {
@@ -454,7 +454,7 @@ public abstract class SpojoUtils {
 			} else if (Set.class.equals(ret) || Collection.class.equals(ret)) {
 				return LinkedHashSet.class;
 			}
-			throw new RuleException("The interface: '" + ret + "' can't be instanciated");
+			throw new SpojoException("The interface: '" + ret + "' can't be instanciated");
 		} else {
 			// check for collections
 			if (Collection.class.isAssignableFrom(ret)) {

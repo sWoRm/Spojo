@@ -13,8 +13,8 @@ import java.util.Set;
 import org.sands.spojo.Spojo;
 import org.sands.spojo.annotations.Rule;
 import org.sands.spojo.annotations.Rules;
-import org.sands.spojo.exceptions.RuleException;
 import org.sands.spojo.exceptions.RuleNotFoundException;
+import org.sands.spojo.exceptions.SpojoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,36 +35,36 @@ public class SpojoConfiguration {
 
 	private Map<String, RuleMetadata> ruleMapByName = null;
 
-	public SpojoConfiguration() throws RuleException {
+	public SpojoConfiguration() throws SpojoException {
 		this(new HashMap<String, RuleMetadata>());
 	}
 
 	/**
 	 * @param ruleMapByName
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if parameter is null
 	 */
-	public SpojoConfiguration(final Map<String, RuleMetadata> ruleMapByName) throws RuleException {
+	public SpojoConfiguration(final Map<String, RuleMetadata> ruleMapByName) throws SpojoException {
 		setRuleMapByName(ruleMapByName);
 	}
 
 	/**
 	 * @param ruleMetadataList
 	 *            a list of filter definitions
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if parameter is null
 	 */
-	public SpojoConfiguration(final List<RuleMetadata> ruleMetadataList) throws RuleException {
+	public SpojoConfiguration(final List<RuleMetadata> ruleMetadataList) throws SpojoException {
 		addRuleMetadata(ruleMetadataList);
 	}
 
 	/**
 	 * @param ruleMetadata
 	 *            a filter definition
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if parameter is null
 	 */
-	public SpojoConfiguration(final RuleMetadata ruleMetadata) throws RuleException {
+	public SpojoConfiguration(final RuleMetadata ruleMetadata) throws SpojoException {
 		addRuleMetadata(ruleMetadata);
 	}
 
@@ -74,10 +74,10 @@ public class SpojoConfiguration {
 	 * @param clazz
 	 *            the class annotated
 	 */
-	public void addClass(final Class<?> clazz) throws RuleException {
+	public void addClass(final Class<?> clazz) throws SpojoException {
 
 		if (clazz == null) {
-			throw new RuleException("class parameter must not be null");
+			throw new SpojoException("class parameter must not be null");
 		}
 
 		Annotation[] declaredAnnotations = clazz.getDeclaredAnnotations();
@@ -118,16 +118,16 @@ public class SpojoConfiguration {
 	 *            the class annotated
 	 * @param ruleList
 	 *            the list of Rule definition
-	 * @throws RuleException
+	 * @throws SpojoException
 	 * @see Rule
 	 */
-	protected void addRule(final List<Rule> ruleList) throws RuleException {
+	protected void addRule(final List<Rule> ruleList) throws SpojoException {
 
 		if (ruleList == null) {
-			throw new RuleException("ruleList parameter must not be null");
+			throw new SpojoException("ruleList parameter must not be null");
 		}
 		if (ruleList.isEmpty()) {
-			throw new RuleException("ruleList parameter must not be empty");
+			throw new SpojoException("ruleList parameter must not be empty");
 		}
 
 		// first pass: add Rules to map
@@ -147,12 +147,12 @@ public class SpojoConfiguration {
 	 * @param ruleMetadata
 	 *            the metadata definition
 	 * @return this
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if some of the parameters is null
 	 */
-	public SpojoConfiguration addRuleMetadata(final RuleMetadata ruleMetadata) throws RuleException {
+	public SpojoConfiguration addRuleMetadata(final RuleMetadata ruleMetadata) throws SpojoException {
 		if (ruleMetadata == null) {
-			throw new RuleException("ruleMetadata parameter must not be null");
+			throw new SpojoException("ruleMetadata parameter must not be null");
 		}
 		getRuleMapByName().put(ruleMetadata.getName(), ruleMetadata);
 		// secondPass
@@ -168,16 +168,16 @@ public class SpojoConfiguration {
 	 * @param ruleMetadataList
 	 *            the metadata list definition
 	 * @return this
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if some of the parameters is null
 	 */
-	public SpojoConfiguration addRuleMetadata(final List<RuleMetadata> ruleMetadataList) throws RuleException {
+	public SpojoConfiguration addRuleMetadata(final List<RuleMetadata> ruleMetadataList) throws SpojoException {
 		if (ruleMetadataList == null) {
-			throw new RuleException("ruleMetadataList parameter must not be null");
+			throw new SpojoException("ruleMetadataList parameter must not be null");
 		}
 
 		if (ruleMetadataList.isEmpty()) {
-			throw new RuleException("ruleMetadataList parameter must not be empty");
+			throw new SpojoException("ruleMetadataList parameter must not be empty");
 		}
 
 		for (RuleMetadata ruleMetadata : ruleMetadataList) {
@@ -196,7 +196,7 @@ public class SpojoConfiguration {
 	 * @param rulesMetadataClassBean
 	 * @return this
 	 */
-	public SpojoConfiguration setRuleMetadata(final List<RuleMetadata> ruleMetadataList) throws RuleException {
+	public SpojoConfiguration setRuleMetadata(final List<RuleMetadata> ruleMetadataList) throws SpojoException {
 		return addRuleMetadata(ruleMetadataList);
 	}
 
@@ -214,7 +214,7 @@ public class SpojoConfiguration {
 	/**
 	 * Append the property definitions to the property with inheritance.
 	 */
-	protected void processExtendedRules() throws RuleException {
+	protected void processExtendedRules() throws SpojoException {
 		processExtendedRules(getRuleMapByName());
 	}
 
@@ -224,7 +224,7 @@ public class SpojoConfiguration {
 	 * @param ruleNameMap
 	 *            the map configuration content
 	 */
-	protected void processExtendedRules(final Map<String, RuleMetadata> ruleNameMap) throws RuleException {
+	protected void processExtendedRules(final Map<String, RuleMetadata> ruleNameMap) throws SpojoException {
 
 		if (ruleNameMap != null) {
 			for (Entry<String, RuleMetadata> entry : ruleNameMap.entrySet()) {
@@ -246,7 +246,7 @@ public class SpojoConfiguration {
 	 * 
 	 * @param ruleMetadata
 	 */
-	protected void iterateExtendsFrom(final RuleMetadata ruleMetadata) throws RuleException {
+	protected void iterateExtendsFrom(final RuleMetadata ruleMetadata) throws SpojoException {
 		iterateExtendsFrom(ruleMetadata, getRuleMapByName(), new HashSet<String>());
 	}
 
@@ -257,10 +257,10 @@ public class SpojoConfiguration {
 	 *            the given ruleMetadata definition
 	 * @param ruleNameMap
 	 *            the map configuration content
-	 * @throws RuleException
+	 * @throws SpojoException
 	 */
 	protected void iterateExtendsFrom(final RuleMetadata ruleMetadata, final Map<String, RuleMetadata> ruleNameMap,
-			final Set<String> processing) throws RuleException {
+			final Set<String> processing) throws SpojoException {
 		if (ruleMetadata == null) {
 			logger.warn("The Rule definition is null");
 		} else if (ruleMetadata.getExtendsFrom().isEmpty()) {
@@ -269,12 +269,12 @@ public class SpojoConfiguration {
 		} else {
 			for (String name : ruleMetadata.getExtendsFrom()) {
 				if (ruleNameMap == null) {
-					throw new RuleException("ruleNameMap parameter must not be null");
+					throw new SpojoException("ruleNameMap parameter must not be null");
 				}
 
 				final RuleMetadata ruleMetadataToExtend = ruleNameMap.get(name);
 				if (processing == null) {
-					throw new RuleException("processing parameter must not be null");
+					throw new SpojoException("processing parameter must not be null");
 				}
 				if (ruleMetadata.getName().equals(name)) {
 					logger.warn(
@@ -343,12 +343,12 @@ public class SpojoConfiguration {
 	 * 
 	 * @param ruleMapByName
 	 *            the ruleMapByName to set
-	 * @throws RuleException
+	 * @throws SpojoException
 	 *             if parameter is null
 	 */
 	protected void setRuleMapByName(final Map<String, RuleMetadata> ruleMapByName) {
 		if (ruleMapByName == null) {
-			throw new RuleException("ruleMapByName can not be null!!");
+			throw new SpojoException("ruleMapByName can not be null!!");
 		}
 		this.ruleMapByName = ruleMapByName;
 		processExtendedRules(this.ruleMapByName);
