@@ -14,7 +14,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.sands.spojo.annotations.Rule;
 import org.sands.spojo.annotations.Rules;
 import org.sands.spojo.config.SpojoConfiguration;
-import org.sands.spojo.exceptions.RuleException;
 import org.sands.spojo.exceptions.SpojoException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;

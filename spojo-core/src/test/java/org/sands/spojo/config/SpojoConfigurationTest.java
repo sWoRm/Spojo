@@ -19,7 +19,6 @@ import org.sands.spojo.annotations.Rule;
 import org.sands.spojo.annotations.Rules;
 import org.sands.spojo.data.BasicProperty;
 import org.sands.spojo.enums.RuleType;
-import org.sands.spojo.exceptions.RuleException;
 import org.sands.spojo.exceptions.RuleNotFoundException;
 import org.sands.spojo.exceptions.SpojoException;
 
