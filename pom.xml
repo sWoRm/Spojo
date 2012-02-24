@@ -24,7 +24,7 @@
 		<maven.compiler.fork>true</maven.compiler.fork>
 		<maven.compiler.meminitial>256m</maven.compiler.meminitial>
 		<maven.compiler.maxmem>512m</maven.compiler.maxmem>
-		<maven.compiler.debug>false</maven.compiler.debug>
+		<maven.compiler.debug>true</maven.compiler.debug>
 		<maven.surefire.maxmen>-Xmx512M</maven.surefire.maxmen>
 		<encoding>${maven.compiler.encoding}</encoding>
 
@@ -78,7 +78,7 @@
 					<meminitial>${maven.compiler.meminitial}</meminitial>
 					<maxmem>${maven.compiler.maxmem}</maxmem>
 					<encoding>${maven.compiler.encoding}</encoding>
-					<!-- <debug>${maven.compiler.debug}</debug> -->
+					<debug>${maven.compiler.debug}</debug>
 				</configuration>
 			</plugin>
 			<plugin>
