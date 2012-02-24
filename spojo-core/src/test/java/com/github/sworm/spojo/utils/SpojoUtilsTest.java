@@ -255,6 +255,7 @@ public class SpojoUtilsTest extends BaseTestCase {
 		/**
 		 * @return the privateString
 		 */
+		@SuppressWarnings("unused")
 		private String getPrivateString() {
 			return privateString;
 		}
@@ -263,6 +264,7 @@ public class SpojoUtilsTest extends BaseTestCase {
 		 * @param privateString
 		 *            the privateString to set
 		 */
+		@SuppressWarnings("unused")
 		private void setPrivateString(final String privateString) {
 			this.privateString = privateString;
 		}

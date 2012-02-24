@@ -1,7 +1,7 @@
 package com.github.sworm.spojo.config;
 
-import static org.junit.Assert.*;
 import static com.github.sworm.spojo.enums.RuleType.*;
+import static org.junit.Assert.*;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
 import com.github.sworm.spojo.BaseTestCase;
 import com.github.sworm.spojo.annotations.Rule;
 import com.github.sworm.spojo.annotations.Rules;
@@ -99,6 +100,9 @@ public class SpojoConfigurationTest extends BaseTestCase {
 
 	}
 
+	// due to an implementation of an Annotation for simplifying the test
+	// we are forced to include the SuppressWarning
+	@SuppressWarnings("all")
 	public static class RuleAnn implements Rule {
 
 		private String name = null;
