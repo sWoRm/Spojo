@@ -112,8 +112,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.2</version>
                 <configuration>
-                    <need this for gpg plugin to work correctly 
-					 <pushChanges>false</pushChanges>
+                    <need this for gpg plugin to work correctly <pushChanges>false</pushChanges>
 
                     <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
