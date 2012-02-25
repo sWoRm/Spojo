@@ -5,7 +5,7 @@
 	<artifactId>spojo-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Spojo</name>
-	 <version>1.0.2</version>
+	 <version>1.0.2-SNAPSHOT</version>
 	<description>Spojo Framework Parent</description>
 
 	<parent>
@@ -52,7 +52,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:sWoRm/Spojo.git</connection>
 		<developerConnection>scm:git:git@github.com:sWoRm/Spojo.git</developerConnection>
-		<url>git@github.com:sWoRm/Spojo.git</url>
+		<url>scm:git:git@github.com:sWoRm/Spojo.git</url>
 	</scm>
 
 
