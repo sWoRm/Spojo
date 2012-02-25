@@ -3,18 +3,18 @@
 	<parent>
 		<artifactId>spojo-parent</artifactId>
 		<groupId>com.github.sworm</groupId>
-		 <version>1.0.2-SNAPSHOT</version>
+		 <version>1.0.2</version>
 	</parent>
 	<groupId>com.github.sworm</groupId>
 	<artifactId>spojo-hibernate</artifactId>
-	 <version>1.0.2-SNAPSHOT</version>
+	 <version>1.0.2</version>
 	<name>Spojo-hibernate</name>
 	<url>http://github.com/sWoRm/Spojo</url>
 	<dependencies>
 		<dependency>
 			<groupId>com.github.sworm</groupId>
 			<artifactId>spojo-core</artifactId>
-			 <version>1.0.2-SNAPSHOT</version>
+			 <version>1.0.2</version>
 			<scope>compile</scope>
 		</dependency>	
 		<dependency>
