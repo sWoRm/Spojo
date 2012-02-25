@@ -5,7 +5,7 @@
 	<artifactId>spojo-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Spojo</name>
-	 <version>1.0.2-SNAPSHOT</version>
+	 <version>1.0.2</version>
 	<description>Spojo Framework Parent</description>
 
 	<parent>
@@ -107,6 +107,12 @@
 					</archive>
 				</configuration>
 			</plugin>
+			 <plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+				</configuration>
+			  </plugin>
 		</plugins>
 	</build>
 	<profiles>
