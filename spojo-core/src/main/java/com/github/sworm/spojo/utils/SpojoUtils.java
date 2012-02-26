@@ -19,12 +19,13 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.github.sworm.spojo.data.Property;
-import com.github.sworm.spojo.exceptions.SpojoException;
 import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.util.Assert;
+
+import com.github.sworm.spojo.data.Property;
+import com.github.sworm.spojo.exceptions.SpojoException;
 
 /**
  * Static convenience methods for JavaBeans: for instantiating beans,copying bean properties,etc. <br>
@@ -47,13 +48,13 @@ import org.springframework.util.Assert;
  */
 public abstract class SpojoUtils {
 
-	static HashSet<Class<?>> defaultImmutableClasses = new HashSet<Class<?>>();
+	static Set<Class<?>> defaultImmutableClasses = new HashSet<Class<?>>();
 	static {
-		defaultImmutableClasses.add(Character.class);
-		defaultImmutableClasses.add(String.class);
-		defaultImmutableClasses.add(Date.class);
-		defaultImmutableClasses.add(java.sql.Date.class);
-		defaultImmutableClasses.add(Timestamp.class);
+		addImmutableClass(Character.class);
+		addImmutableClass(String.class);
+		addImmutableClass(Date.class);
+		addImmutableClass(java.sql.Date.class);
+		addImmutableClass(Timestamp.class);
 	}
 
 	/**
