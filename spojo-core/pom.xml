@@ -3,11 +3,11 @@
   <parent>
     <artifactId>spojo-parent</artifactId>
     <groupId>com.github.sworm</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <groupId>com.github.sworm</groupId>
   <artifactId>spojo-core</artifactId>
-     <version>1.0.0-SNAPSHOT</version>
+     <version>1.0.0</version>
   <name>Spojo-core</name>
   <url>http://github.com/sWoRm/Spojo</url>
 </project>
